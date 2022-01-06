@@ -1,0 +1,46 @@
+html
+	header
+	body
+		include ../partials/header
+		div(class="mainDiv")
+			h1 #{person.name}
+
+			if isFollowed
+				button#unfollow Unfollow
+			else
+				button#follow Follow
+
+			br
+			br
+
+			if person.director.length != 0
+				h3 Directed in:
+				ul
+					each movie in person.director
+						li
+							a(href="/movies/"+movie._id class="link")  #{movie.title}
+
+			if person.writer.length != 0
+				h3 Written in:
+				ul
+					each movie in person.writer
+						li
+							a(href="/movies/"+movie._id class="link")  #{movie.title}
+
+			if person.actor.length != 0
+				h3 Acted In:
+				ul
+					each movie in person.actor
+						li
+							a(href="/movies/"+movie._id class="link")  #{movie.title}
+
+			br
+
+			h3 Frequent Collaborators
+			ul
+				each person in freqCols
+					li
+						a(href="/people/"+person._id class="link")  #{person.name}
+
+		script let id = "#{person._id}";
+		script(src="../person.js")

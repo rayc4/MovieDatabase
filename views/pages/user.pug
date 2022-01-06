@@ -1,0 +1,94 @@
+html
+	head
+		style.
+			#watchlist{
+				line-height: 1.8;
+			}
+			ul{
+				line-height: 1.8;
+			}
+	body
+		include ../partials/header
+		div(class="mainDiv")
+			h1#username #{user.username}
+
+			if isSelf
+				button#signOut Sign Out 
+				br
+				br
+				if user.isContr
+					p #[b User Type:] Contributing 
+					button#toggle Switch to Regular
+				else
+					p #[b User Type:] Regular 
+					button#toggle Switch to Contributing
+				br
+
+				br
+
+				h3 Notifications
+				ul
+					each notif in user.notifications
+						li !{notif}
+				br
+
+				h3 Recommended Movies
+				ul
+					each movie in user.recommended
+						li
+							a(href="/movies/"+movie._id class="link") #{movie.title}
+
+				br
+
+				h3 Following Users
+				ul
+					each followee in user.followingUsers
+						li
+							a(href="/users/"+followee.username class="link") #{followee.username}
+
+
+			else
+				if isFollowed
+					button#unfollow Unfollow
+				else
+					button#follow Follow
+
+			br
+			h3 Following People
+			ul
+				each person in user.followingPeople
+					li
+						a(href="/people/"+person._id class="link") #{person.name}
+
+			br
+
+			h3 Watchlist
+			ul#watchlist
+				each movie in user.watchlist
+					li
+						if isSelf
+							button(id=movie._id) Remove
+						a(href="/movies/"+movie._id class="link") 
+							| &nbsp 
+							| #{movie.title}
+
+			br
+
+			h3 Reviews
+			ul#reviews
+				each review in user.reviews
+					li
+						if review.isFull
+							button(href="/reviews/"+review._id) See full review
+						else
+							| #[i Basic Review:] &nbsp 
+						a(href="/movies/"+review.movie._id class="link") &nbsp #{review.movie.title}
+						| : #{review.score}/10 &nbsp 
+						
+
+			script.
+				let isFollowed = #{isFollowed};
+				let isSelf = #{isSelf};
+				let username = "#{user.username}";
+
+			script(src="../user.js")

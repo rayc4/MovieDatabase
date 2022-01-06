@@ -1,0 +1,76 @@
+html
+	head
+		style.
+			body{
+				text-align: center;
+			}
+			#directors{
+				overflow: scroll;
+			}
+	body
+		include ../partials/header
+		if !session.username
+			h3 You are not logged in. Please click on 'Sign In/Up'.
+		else if isContr
+			div(class="mainDiv")
+				h3 Add Person
+				form
+					table(align="center")
+						tr
+							td(align="right") Name:
+							td(align="left")
+								input#personName
+					br
+					button#submitPerson(type="button") Submit
+				br
+				h3 Add Movie
+				form
+					table(align="center")
+						tr
+							td(align="right") Title: 
+							td(align="left")
+								input#titleInput
+						tr
+							td(align="right") Release Year:
+							td(align="left")
+								input#yearInput
+						tr
+							td(align="right") Runtime: 
+							td(align="left")
+								input#runtimeInput
+						tr
+							td(align="right" valign="top") Plot: 
+							td(align="left")
+								textarea#plotInput(rows='5')
+						tr
+							td(align="right" valign="top") Genres: 
+							td#genresCell(align="left")
+								input#genreInput
+								button#addGenre(type='button') Add
+						tr
+							td(align="right" valign="top") Directors:
+							td#directorsCell(align="left")
+								input#directorInput(list="people")
+								button#addDirector(type='button') Add
+						tr
+							td(align="right" style="vertical-align:top") Writers:
+							td#writersCell(align="left")
+								input#writerInput(list="people")
+								button#addWriter(type='button') Add
+						tr
+							td(align="right" style="vertical-align:top") Actors:
+							td#actorsCell(align="left")
+								input#actorInput(list="people")
+								button#addActor(type='button') Add
+								
+					br
+					button#submitMovie(type="button") Submit
+		else
+			h3 You are not a contributing user. Go to 'My Account' to switch to a contributing user.
+		
+		datalist#people
+
+		script.
+			// let people = !{JSON.stringify(people)};
+		if isContr
+			script(src="../contribute.js")

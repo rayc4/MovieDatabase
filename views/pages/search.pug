@@ -1,0 +1,28 @@
+html
+	head
+		style.
+			body{
+				text-align: center
+			}
+	body
+		include ../partials/header
+		h2 Search for Movies
+		form
+			table(align="center")
+				tr
+					td(align="right") Title:
+					td(align="left")
+						input(id="title")
+				tr
+					td(align="right") Actor:
+					td(align="left")
+						input(id="actor")
+				tr
+					td(align="right") Genre:
+					td(align="left")
+						input(id="genre")
+			br
+			button#search(type='button') Search
+
+		script(src="../search.js")
+

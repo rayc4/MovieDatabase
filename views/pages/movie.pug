@@ -1,0 +1,99 @@
+html 
+	head
+		title Movie Database: #{movie.title}
+		style.
+			img{
+				float: right;
+			}
+			#reviews{
+				line-height: 1.8;
+			}
+	body
+		include ../partials/header
+		div(class="mainDiv")
+			img(src=movie.poster)
+			h1 #{movie.title}
+
+			if(inWatchlist)
+				button#removeFromWatchlist Remove From Watchlist
+			else
+				button#addToWatchlist Add To Watchlist
+
+			br
+			br
+			p #[b Release Year:] #{movie.year}
+
+			if !movie.avgScore
+				p #[b Average Review Rating:] (No reviews found)
+			else
+				p #[b Average Review Rating:] #{movie.avgScore}/10
+
+			p #[b Runtime:] #{movie.runtime}
+			p #[b Plot:] #{movie.plot}
+
+			- spaces = "&nbsp".repeat(5);
+
+			p #[b Genre:] 
+				each g in movie.genre
+					| !{spaces}
+					a(href="/movies?title=&actor=&page=1&genre="+g, class="link") #{g}
+			
+			br
+
+			p #[b Directors]
+			ul
+				each person in movie.director
+					li 
+						a(href="/people/"+person._id class="link") #{person.name}
+
+			p #[b Writers]
+			ul
+				each person in movie.writer
+					li 
+						a(href="/people/"+person._id class="link") #{person.name}
+
+			p #[b Actors]
+			ul
+				each person in movie.actor
+					li 
+						a(href="/people/"+person._id class="link") #{person.name}
+
+			br
+			p #[b Similar Movies]
+			ul
+				each movie in similars
+					li 
+						a(href="/movies/"+movie._id class="link") #{movie.title}
+
+			br
+
+			p #[b Reviews]
+			ul#reviews
+				each review in movie.reviews
+					li
+						if review.isFull
+							button(onclick="seeFullReview(this)" id=review._id) See full review
+						else
+							| #[i Basic Review:] &nbsp 
+						| &nbsp #{review.score}/10 &nbsp by &nbsp 
+						a(href="/users/"+review.user.username class="link") #{review.user.username}
+
+			- spaces = '&nbsp'.repeat(3);
+
+			br
+
+			p #[b Add a Review]
+			form(id='revForm')
+				p Review Type: 
+					| !{spaces}
+					input(id='basic' type='radio' name='type')
+					label(for='basic') Basic
+					| !{spaces}
+					input(id='full' type='radio' name='type')
+					label(for='full') Full
+
+		script. 
+			let id = "#{movie._id}";
+			let inWatchlist = #{inWatchlist};
+		script(src="../movie.js")
+		script(src="../seeFullReview.js")

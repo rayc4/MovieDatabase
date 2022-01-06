@@ -1,0 +1,55 @@
+html
+	head
+	body
+		include ../partials/header
+		if session.username
+			div(class="mainDiv")
+				h1 exampleUser
+				
+				br
+				p #[b User Type:] Regular
+				button Switch to Contributing
+
+				br
+				br
+				h3 People you follow
+				ul
+					li 
+						button Unfollow
+						a(href="/people/0" class="link")  William Shakespeare
+					li 
+						button Unfollow
+						a(href="/people/0" class="link")  Michael Jordan
+
+				br
+				h3 Users you follow
+				ul
+					li 
+						button Unfollow
+						a(href="/users/0" class="link")  movielover123
+					li 
+						button Unfollow
+						a(href="/users/0" class="link")  ihatemovies321
+
+				br
+				h3 Watchlist
+				ul
+					li
+						button Remove
+						a(href="/movies/0" class="link")  The Amazing Spider-man
+					li 
+						button Remove
+						a(href="/movies/0" class="link")  The Dark Knight Rises
+
+				br
+				h3 Recommended Movies
+				ul
+					li
+						a(href="/movies/0" class="link")  Aquaman
+
+				br
+				h3 Notifications
+				ul
+					li New movie #[i Space Jam 3] features #[i Michael Jordan] as an actor.
+		else
+			h3(align='center') You are not logged in. Please click on 'Sign In/Up'.

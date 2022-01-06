@@ -1,0 +1,12 @@
+html
+	head
+	body
+		include ../partials/header
+		div(class="mainDiv")
+			h3
+				a(href="/movies/"+review.movie._id class="link") #{review.movie.title}
+				| : 8/10
+			p #[b Summary:] #{review.summary}
+			p #{review.body}
+			p by 
+				a(href="/users/"+review.user.username class="link") #{review.user.username}

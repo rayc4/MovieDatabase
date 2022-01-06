@@ -1,0 +1,30 @@
+html
+	head
+		style.
+			body{
+				text-align: center;
+			}
+	body
+		include ../partials/header
+		if !session.username
+			h3 Enter username and password to sign in or sign up with:
+
+			div(class="formContainer")
+				table(align="center")
+					tr
+						td(align="right") Username:
+						td(align="left")
+							input#usernameInput
+					tr
+						td(align="right") Password:
+						td(align="left")
+							input(type="password")#passwordInput
+				br
+				p
+					button#signIn Sign In 
+					| &nbsp &nbsp
+					button#signUp Sign Up 
+
+			script(src="signinup.js")
+		else
+			h3 You are already logged in! Click on 'My Account' to view your account!

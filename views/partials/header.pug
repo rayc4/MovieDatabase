@@ -1,0 +1,39 @@
+title Movie Database
+style.
+	#header{
+		font-family: Verdana;
+		background: #66ccff;
+		color: Black;
+		text-align: center;
+		padding: 1px;
+		height: 130px;
+		margin-bottom: 40px;
+	}
+	.headerLink, .headerLink:visited, .headerLink:active{
+		color: inherit;
+		text-decoration: none;
+	}
+	.headerLink:hover{
+		color: white;
+	}
+	.link, .link:visited, .link:active{
+		color: #34b4eb;
+		text-decoration: none;
+	}
+	.revLink{
+		color: #22bf22;
+		text-decoration: none;
+	}
+	.mainDiv{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	
+div#header
+	- let spaces = '&nbsp'.repeat(6);
+	h1 Movie Database
+	a(href="/" class="headerLink") Home !{spaces}
+	a(href="/search" class="headerLink") Search !{spaces}
+	a(href="/sign" class="headerLink") Sign In/Up !{spaces}
+	a(href="/myacc" class="headerLink") My Account !{spaces}
+	a(href="/contribute" class="headerLink") Contribute !{spaces}
